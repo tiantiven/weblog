@@ -8,33 +8,33 @@ import datetime
 
 class TestPlatformModel(TestCase):
     def setUp(self):
-        self.platform_instance = PlatformModel.objects.create(pf_name='币安',
-                                                              pf_alias='BN')
+        self.platform_instance = PlatformModel.objects.create(name='币安',
+                                                              alias='BN')
 
     def test_can_save_platform(self):
         pf1 = PlatformModel()
-        pf1.pf_name = '欧易'
-        pf1.pf_alias = 'OKX'
+        pf1.name = '欧易'
+        pf1.alias = 'OKX'
         pf1.save()
         self.assertEqual(2, PlatformModel.objects.count())
 
 
 class TestPlanModel(TestCase):
     def setUp(self):
-        self.platform_instance = PlatformModel.objects.create(pf_name='币安',
-                                                              pf_alias='BN')
+        self.platform_instance = PlatformModel.objects.create(name='币安',
+                                                              alias='BN')
 
     def test_can_save_plan(self):
         p1 = PlanModel()
-        p1.p_name = 'Inc1'
-        p1.p_alias = 'Inc1'
-        p1.p_platform = self.platform_instance
-        p1.p_start_at = datetime.date.today()
-        p1.p_cycle = 'D'
+        p1.name = 'Inc1'
+        p1.alias = 'Inc1'
+        p1.platform = self.platform_instance
+        p1.start_at = datetime.date.today()
+        p1.cycle = 'D'
         p1.p_type = 'I'
-        p1.p_variable = 1
-        p1.p_expected_total = 66
-        p1.p_end_at = datetime.date.today() + datetime.timedelta(days=365)
+        p1.variable = 1
+        p1.expected_total = 66
+        p1.end_at = datetime.date.today() + datetime.timedelta(days=365)
         p1.save()
         self.assertEqual(1, PlanModel.objects.count())
 
@@ -43,18 +43,18 @@ class TestLogModel(TestCase):
     def setUp(self):
         _today = datetime.date.today()
         _day_in_a_year = _today + datetime.timedelta(days=365)
-        self.platform_instance = PlatformModel.objects.create(pf_name='币安',
-                                                              pf_alias='BN')
-        self.plan_instance = PlanModel.objects.create(p_name='BN_Inc1',
-                                                      p_alias='BN_INC1',
-                                                      p_start_at=_today,
-                                                      p_end_at=_day_in_a_year,
-                                                      p_type='I',
-                                                      p_cycle='D',
-                                                      p_variable=1,
-                                                      p_expected_total=100,
-                                                      p_platform=self.platform_instance
-                                                      )
+        self.platform_instance = PlatformModel.objects.create(name='币安',
+                                                              alias='BN')
+        self.plan_instance = PlanModel.objects.create(
+                name='BN_Inc1',
+                alias='BN_INC1',
+                start_at=_today,
+                end_at=_day_in_a_year,
+                p_type='I',
+                cycle='D',
+                variable=1,
+                expected_total=100,
+                platform=self.platform_instance)
 
     def test_can_save_log(self):
         l1 = LogModel()
