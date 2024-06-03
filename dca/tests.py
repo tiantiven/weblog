@@ -58,14 +58,14 @@ class TestLogModel(TestCase):
 
     def test_can_save_log(self):
         l1 = LogModel()
-        l1.p_uid = self.plan_instance
+        l1.plan = self.plan_instance
         l1.direction = 'D'
         l1.expected_quantity = 1
         l1.actual_quantity = 1
         l1.progress = 1
         l1.save()
         l2 = LogModel()
-        l2.p_uid = self.plan_instance
+        l2.plan = self.plan_instance
         l2.direction = 'W'
         l2.expected_quantity = 1
         l2.actual_quantity = 1
